@@ -1,0 +1,21 @@
+CREATE TABLE course (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE student (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    dob TIMESTAMPTZ NOT NULL,
+    course_id INTEGER NOT NULL REFERENCES course(id) ON DELETE CASCADE
+);
+
+CREATE TABLE teacher (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    dob DATE NOT NULL,
+    joined_date TIMESTAMPTZ NOT NULL
+);
+

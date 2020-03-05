@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package model;
+
+service StudentText {
+    rpc Register (Student) returns (Response);
+    rpc Edit (Student) returns (Response);
+    rpc Get (Request) returns (Student);
+    rpc GetAll (Request) returns (Students);
+    rpc Remove (Request) returns (Response);
+}
+
+service TeacherText {
+    rpc Register (Teacher) returns (Response);
+    rpc Edit (Teacher) returns (Response);
+    rpc Get (Request) returns (Teacher);
+    rpc GetAll (Request) returns (Teachers);
+    rpc Remove (Request) returns (Response);
+}
+
+// Course contains information about courses available
+message Course {
+    int32 id = 1;
+    string name = 2;
+}
+
+message Student {
+    int32 id = 1;
+    string firstName = 2;
+    string lastName = 3;
+    google.protobuf.Timestamp doB = 4;
+    Course course = 5;
+}
+
+message Students {
+    uint64 id = 1;
+    repeated Student students = 2;
+}
+
+message Teachers {
+    uint64 id = 1;
+    repeated Teacher teachers = 2;
+}
+
+message Teacher {
+    int32 id = 1;
+    string firstName = 2;
+    string lastName = 3;
+    google.protobuf.Timestamp doB = 4;
+    google.protobuf.Timestamp joinedDate = 5;
+}
+
+message Response {
+    string message = 1;
+    int32 code = 2;
+}
+
+message Request {
+    int32 id = 1;
+}
